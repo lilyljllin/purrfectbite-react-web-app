@@ -17,29 +17,39 @@ export default function ArticleEditor() {
     const articleId = params.get('articleId');
     
     const [aid, setAid] = useState(articleId ? articleId : "");
-    const [article, setArticle] = useState<any>({});
+    const [article, setArticle] = useState<any>({ author: currentUser._id, title: "", content: "" });
+    const [error, setError] = useState<string | null>(null);
 
     const fetchArticle = async () => {
-        if (aid !== "") {
-            const thisArticle = await client.findArticleById(aid);
-            setArticle(thisArticle);
-        } else {
-            setArticle({ author: currentUser._id, title: "", content: "" });
+        try {
+            if (aid !== "") {
+                const thisArticle = await client.findArticleById(aid);
+                setArticle(thisArticle);
+            }
+        } catch (error) {
+            console.error("Failed to fetch article:", error);
         }
     };
 
     const saveArticle = async (e: React.FormEvent) => {
         e.preventDefault(); // Prevent default form submission behavior
-        if (articleId) {
-            const thisArticle = await client.editArticle(aid, article);
-            setArticle(thisArticle);
-            navigate(`/PurrfectBite/articles/${thisArticle._id}`);
-        } else {
-            const thisArticle = await client.createArticle(article);
-            setArticle(thisArticle);
-            navigate(`/PurrfectBite/articles/${thisArticle._id}`);
+        if (!article.title.trim() || !article.content.trim()) {
+            setError("Title and content cannot be empty.");
+            return;
         }
-        
+        try {
+            let thisArticle;
+            if (articleId) {
+                thisArticle = await client.editArticle(aid, article);
+                setArticle(thisArticle);
+            } else {
+                thisArticle = await client.createArticle(article);
+                setArticle(thisArticle);
+            }
+            navigate(`/PurrfectBite/articles/${thisArticle._id}`);
+        } catch (error) {
+            console.error("Failed to save article:", error);
+        }
     };
 
     useEffect(() => {
@@ -50,6 +60,7 @@ export default function ArticleEditor() {
         <div id="article-editor" className="container-fluid">
             <form className="container-fluid" onSubmit={saveArticle}>
                 <h3>Article Editor:</h3>
+                {error && <div className="alert alert-danger">{error}</div>}
                 <div className="mb-3 row">
                     <label htmlFor="title" className="form-label col-sm-2">Title</label>
                     <div className="col-sm-10">
