@@ -2,11 +2,13 @@ import { CiSearch } from "react-icons/ci";
 import { useEffect, useState } from 'react';
 import { Navigate, useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
+
 export default function Menu() {
     const navigate = useNavigate();
     
     const [searchType, setSearchType] = useState('recipes');
     const [searchString, setSearchString] = useState("");
+    const [menuSelection, setMenuSelection] = useState("Menu");
 
     const handleSearch = (e: any) => {
         e.preventDefault();
@@ -16,25 +18,32 @@ export default function Menu() {
             navigate(`/PurrfectBite/articles/search?search=${searchString}`);
         }
     };
+
     const handleSelectChange = (event: any) => {
         const selectedOption = event.target.value;
+        setMenuSelection("Menu"); // Reset the select value to "Menu" after navigating
+
         if (selectedOption === 'profile') {
           navigate('/PurrfectBite/account/profile');
         } else if (selectedOption === 'saved') {
           navigate(`/PurrfectBite/account/${currentUser._id}/saved`);
         } else if (selectedOption === "signin") {
-            navigate('/PurrfectBite/account/signin')
+            navigate('/PurrfectBite/account/signin');
         } else if (selectedOption === "published") {
-            navigate (`/PurrfectBite/articles/author/${currentUser._id}`)
+            navigate(`/PurrfectBite/articles/author/${currentUser._id}`);
         } else if (selectedOption === "users") {
-            navigate (`/PurrfectBite/users`)
+            navigate(`/PurrfectBite/users`);
+        } else if (selectedOption === "home") {
+            navigate('/PurrfectBite/home');
         }
       };
-      const { currentUser } = useSelector((state: any) => state.accountReducer);
+
+    const { currentUser } = useSelector((state: any) => state.accountReducer);
       
-      const isDietitian = currentUser && (currentUser.role === "DIETITIAN");
-      const isAdmin = currentUser && (currentUser.role ==="ADMIN");
-      useEffect(() => { 
+    const isDietitian = currentUser && (currentUser.role === "DIETITIAN");
+    const isAdmin = currentUser && (currentUser.role ==="ADMIN");
+
+    useEffect(() => { 
     }, []);
     
     return (
@@ -66,8 +75,9 @@ export default function Menu() {
         </form>
                 <button className="btn btn-brown btn-sm d-none d-md-block col-1 mx-1" onClick={() => navigate("/PurrfectBite/recipes")}>Recipes</button>
                 <button className="btn btn-brown btn-sm d-none d-md-block col-1 mx-1" onClick={() => navigate("/PurrfectBite/articles")}>Articles</button>
-                <select className="form-select col" onChange={handleSelectChange}>
-                    <option selected>Menu</option>
+                <select className="form-select col" value={menuSelection} onChange={handleSelectChange}>
+                    <option>Menu</option>
+                    <option value="home">Home</option>
                     {currentUser && <option value="profile">My Profile</option>}
                     {currentUser && <option value="saved">Saved</option>}
                     {isDietitian && <option value="published">Published Articles</option>}
@@ -75,7 +85,6 @@ export default function Menu() {
                     {!currentUser && <option value="signin">Sign in</option>}
                 </select>
             </div>
-
         </div>
     );
 };

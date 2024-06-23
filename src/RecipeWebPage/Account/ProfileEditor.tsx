@@ -44,6 +44,7 @@ export default function ProfileEditor() {
                             className="form-control"
                             id="first-name"
                             value={profile.firstName}
+                            placeholder="first name"
                             onChange={(e) => setProfile({ ...profile, firstName: e.target.value })}
                         />
                     </div>
@@ -55,6 +56,7 @@ export default function ProfileEditor() {
                             className="form-control"
                             id="last-name"
                             value={profile.lastName}
+                            placeholder="last name"
                             onChange={(e) => setProfile({ ...profile, lastName: e.target.value })}
                         />
                     </div>
@@ -78,6 +80,7 @@ export default function ProfileEditor() {
                             className="form-control"
                             id="email"
                             value={profile.email}
+                            placeholder="email(xxx@yyy.com)"
                             onChange={(e) => setProfile({ ...profile, email: e.target.value })}
                         />
                     </div>
@@ -89,6 +92,7 @@ export default function ProfileEditor() {
                             className="form-control"
                             id="biography"
                             value={profile.biography}
+                            placeholder="bio"
                             onChange={(e) => setProfile({ ...profile, biography: e.target.value })}
                         />
                     </div>

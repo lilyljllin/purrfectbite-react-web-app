@@ -68,6 +68,7 @@ export default function ArticleEditor() {
                             className="form-control"
                             id="title"
                             value={article.title}
+                            placeholder="title"
                             onChange={(e) => setArticle({ ...article, title: e.target.value })}
                         />
                     </div>
@@ -79,6 +80,7 @@ export default function ArticleEditor() {
                             className="form-control"
                             id="content"
                             value={article.content}
+                            placeholder="article content"
                             onChange={(e) => setArticle({ ...article, content: e.target.value })}
                         />
                     </div>

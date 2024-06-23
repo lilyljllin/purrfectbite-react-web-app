@@ -68,7 +68,7 @@ export default function SavingButton({ rid }: { rid: string }) {
                             value={save.note}
                             onChange={(e) => setSave({ ...save, note: e.target.value })}
                             className="form-control"
-                            placeholder="Save note"
+                            placeholder="note"
                         />
                         <button className="btn btn-brown btn-sm" type="submit"><FaRegHeart className="me-1"/> Save</button>
                     </div>
