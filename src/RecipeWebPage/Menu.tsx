@@ -35,6 +35,8 @@ export default function Menu() {
             navigate(`/PurrfectBite/users`);
         } else if (selectedOption === "home") {
             navigate('/PurrfectBite/home');
+        } else if (selectedOption ==="project") {
+            navigate(`/PurrfectBite/about`)
         }
       };
 
@@ -83,6 +85,7 @@ export default function Menu() {
                     {isDietitian && <option value="published">Published Articles</option>}
                     {isAdmin && <option value="users">All Users</option>}
                     {!currentUser && <option value="signin">Sign in</option>}
+                    <option value="project">About this Project</option>
                 </select>
             </div>
         </div>

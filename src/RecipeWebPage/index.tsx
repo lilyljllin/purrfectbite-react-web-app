@@ -9,6 +9,7 @@ import Account from "./Account";
 import store from "./store";
 import Session from "./Account/Session";
 import Articles from "./Articles";
+import ProjectInformation from "./ProjectInformation";
 export default function RecipeWebPage() {
     return (
       
@@ -25,6 +26,7 @@ export default function RecipeWebPage() {
           <Route path="account/*" element={<Account />} />
           <Route path="articles/*" element={<Articles />} />
           <Route path="users" element={<UserTable />} />
+          <Route path="about" element={<ProjectInformation />} />
         </Routes>
         </div>
         </div>
