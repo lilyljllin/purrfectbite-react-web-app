@@ -1,0 +1,62 @@
+.top-quarter {
+    height: 25vh;
+    background-color: #7b5838;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.mid-menu-bar {
+    height: 10vh;
+    background-color: #fff;
+}
+
+
+.bottom-three-quarters {
+    height: 65vh;
+    background-color: #f0e1d2;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.btn-brown {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: #7b5838;
+    --bs-btn-border-color: #7b5838;
+    --bs-btn-hover-color: #7b5838;
+    display: flex;
+    align-items: center;
+}
+
+.btn-yellow {
+    --bs-btn-color: #7b5838;
+    --bs-btn-bg: #e6d193;
+    --bs-btn-border-color: #e6d193;
+    --bs-btn-hover-color: #e6d193;
+    display: flex;
+    align-items: center;
+}
+
+.brown-link {
+    color: #7b5838;
+    text-decoration: underline;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.brown-link .icon {
+    font-size: 1.5em; 
+    margin-right: 5px; 
+}
+
+.btn-border-brown {
+    color: #7b5838;
+    border-color: #7b5838;
+}
+
+.btn-border-brown:hover {
+    background-color: #7b5838;
+    color: white; /* Adjust this if you need a different hover text color */
+}
