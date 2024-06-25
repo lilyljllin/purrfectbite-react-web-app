@@ -1,19 +1,18 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import * as client from "./client";
+import { useDispatch, useSelector } from "react-redux";
+import { setCurrentUser } from "./reducer";
 
 export default function ProfileEditor() {
     const [profile, setProfile] = useState<any>({ firstName: "", lastName: "", dob: "", email: "", biography: "" });
     const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
-
-    const fetchProfile = async () => {
-        const thisProfile = await client.profile();
-        setProfile(thisProfile || { firstName: "", lastName: "", dob: "", email: "", biography: "" });
-    };
-
+    const { currentUser} = useSelector((state: any) => state.accountReducer);
+   
+    const dispatch = useDispatch();
     useEffect(() => {
-        fetchProfile();
+        setProfile(currentUser);
     }, []);
 
     const editUser = async (e: React.FormEvent) => {
@@ -24,6 +23,7 @@ export default function ProfileEditor() {
         }
         const thisProfile = await client.updateUser(profile);
         setProfile(thisProfile);
+        dispatch(setCurrentUser(thisProfile));
         navigate("/PurrfectBite/account/profile");
     };
 

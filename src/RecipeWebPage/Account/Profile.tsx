@@ -8,15 +8,7 @@ import { FaUserFriends } from "react-icons/fa";
 export default function Profile() {
     const dispatch = useDispatch();
     const [profile, setProfile] = useState<any>({});
-    const fetchProfile = async () => {
-        try {
-        const thisProfile = await client.profile();
-        setProfile(thisProfile);
-        } catch (err: any) {
-            navigate("/PurrfectBite/account/signin");
-        }
-    };
-    useEffect(() => { fetchProfile();}, []);
+    
     const navigate = useNavigate();
     const formatDob = (dob: string | undefined) => {
         if (!dob) return '';
@@ -30,6 +22,7 @@ export default function Profile() {
     }
     const { currentUser} = useSelector((state: any) => state.accountReducer);
     console.log(currentUser)
+    useEffect(() => { setProfile(currentUser);}, [currentUser]);
     return (
         <div id="profile-page" >
             <div className="container-fluid" >
